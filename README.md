@@ -3,5 +3,5 @@ This is a snake I created to learn ruby, works with Ruby2dView and to be honest 
 
 Installation:
 
- 1.- cd snake && bundle install
+ 1.- cd snake && bundle install <br>
  2.- bundle exec ruby src/app.rb
