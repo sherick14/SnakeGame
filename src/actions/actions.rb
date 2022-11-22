@@ -2,8 +2,10 @@ module Actions
     def self.move_snake(state)
         next_direction = state.Current_direction
         next_position = calc_next_position(state)
-        # verificate next celd it's validate 
-        if position_is_valid?(state, next_position)
+        # verificate next celd it's validate
+        if position_is_food?(state, next_position)
+            grow_snake_to(state, next_position)
+        elsif position_is_valid?(state, next_position)
         #if is validate move the snake 
             move_snake_to(state, next_position)
         #else end the game
@@ -22,6 +24,21 @@ module Actions
     end
 
     private
+
+    def self.position_is_food?(state, next_position)
+        state.Food.row == next_position.row && state.Food.col == next_position.col
+    end
+
+    def self.grow_snake_to(state, position)
+        state.Snake.positions = [position] + state.Snake.positions
+        state
+    end
+
+    # def self.grow_snake_to(state, next_position)
+    #     new_snake = [next_position] + state.Snake
+    #     state.Snake = new_snake
+    #     state
+    # end
 
     def self.calc_next_position(state)
         curr_position = state.Snake.positions.first
